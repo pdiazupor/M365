@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+           xsi:type="MailApp">
+
+  <Id>f3a1e4d0-55bc-4e89-b2e4-12a34bc56def</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Ultraport TI</ProviderName>
+
+  <DisplayName DefaultValue="Reportar Correo Sospechoso"/>
+  <Description DefaultValue="Botón para reportar correos sospechosos al área de Ciberseguridad."/>
+
+  <!-- IconUrl eliminado porque genera error en Apps Integradas -->
+
+  <SupportUrl DefaultValue="https://ultraport.cl"/>
+
+  <Permissions>ReadWriteItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://grupouportaxinnt.sharepoint.com/:u:/s/TIPublico/EdsCcX40wrVHr_Vxvm_gfUkBcmbv75Mi3Z_exnzCG2Uo1g"/>
+  </DefaultSettings>
+
+  <ov:VersionOverrides xsi:type="ov:VersionOverridesV1_0">
+
+    <ov:Requirements>
+      <bt:Sets DefaultMinVersion="1.12">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </ov:Requirements>
+
+    <ov:Hosts>
+      <ov:Host xsi:type="ov:MailHost">
+
+        <ov:ExtensionPoint xsi:type="ov:MessageReadCommandSurface">
+
+          <ov:CustomTab id="Ultraport.Reportar.Tab">
+            <ov:Group id="Ultraport.Reportar.Group" label="Seguridad TI">
+
+              <ov:Control xsi:type="ov:Button" id="Ultraport.Reportar.Boton">
+
+                <ov:Label resid="ReportarLabel"/>
+
+                <ov:Supertip>
+                  <ov:Title resid="ReportarLabel"/>
+                  <ov:Description resid="ReportarDescription"/>
+                </ov:Supertip>
+
+                <ov:Icon>
+                  <bt:Image size="16" resid="IconReportar16"/>
+                  <bt:Image size="32" resid="IconReportar32"/>
+                  <bt:Image size="80" resid="IconReportar80"/>
+                </ov:Icon>
+
+                <ov:Action xsi:type="ov:ExecuteFunction">
+                  <ov:FunctionName>reportarCorreoSospechoso</ov:FunctionName>
+                </ov:Action>
+
+              </ov:Control>
+
+            </ov:Group>
+          </ov:CustomTab>
+
+        </ov:ExtensionPoint>
+
+      </ov:Host>
+    </ov:Hosts>
+
+    <ov:Resources>
+
+      <bt:Images>
+        <bt:Image id="IconReportar16"
+                  DefaultValue="https://grupouportaxinnt.sharepoint.com/:i:/s/TIPublico/EY03BtBzKJdDjRSpkAqXTxsB3mYlvwxm2w-Lmkpe-XISOQ"/>
+        <bt:Image id="IconReportar32"
+                  DefaultValue="https://grupouportaxinnt.sharepoint.com/:i:/s/TIPublico/EXWmCwO-hmlNrMyq6FszbE0Bk2Kx-40SCpsT0_Ow3Thytg"/>
+        <bt:Image id="IconReportar80"
+                  DefaultValue="https://grupouportaxinnt.sharepoint.com/:i:/s/TIPublico/EcO2-O6SH0pHgY5Ydkdg2ZMB5J-MFtL0O_WeOtHzHAm6ZA"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="CommandHtml"
+                DefaultValue="https://grupouportaxinnt.sharepoint.com/:u:/s/TIPublico/EdsCcX40wrVHr_Vxvm_gfUkBcmbv75Mi3Z_exnzCG2Uo1g"/>
+        <bt:Url id="FunctionFile"
+                DefaultValue="https://grupouportaxinnt.sharepoint.com/:u:/s/TIPublico/EeUFO9z00W5Oo2Wg5ac7TdgB8M6Sh_ZQuVfwPyeckCoBlQ"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:String id="ReportarLabel"
+                   DefaultValue="Reportar correo sospechoso"/>
+      </bt:ShortStrings>
+
+      <bt:LongStrings>
+        <bt:String id="ReportarDescription"
+                   DefaultValue="Envía este correo al área de Ciberseguridad para su análisis."/>
+      </bt:LongStrings>
+
+    </ov:Resources>
+
+    <ov:FunctionFile resid="FunctionFile"/>
+
+  </ov:VersionOverrides>
+
+</OfficeApp>
